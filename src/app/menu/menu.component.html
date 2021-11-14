@@ -1,0 +1,72 @@
+<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <li nz-submenu nzTitle="Clientes" nzIcon="usergroup-add">
+        <ul>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/clientes">Consulta</a>
+            </li>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/clientes/cad-cliente">Novo</a>
+            </li>
+        </ul>
+    </li>
+    <li nz-submenu nzTitle="Grupos" nzIcon="group">
+        <ul>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/grupos">Consulta</a>
+            </li>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/grupos/cad-grupo">Novo</a>
+            </li>
+        </ul>
+    </li>
+    <li nz-submenu nzTitle="Formas de pagamento" nzIcon="credit-card">
+        <ul>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/forma-pagamento">Consulta</a>
+            </li>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/forma-pagamento/cad-forma-pagamento">Novo</a>
+            </li>
+        </ul>
+    </li>    
+    <li nz-submenu nzTitle="Produtos" nzIcon="code-sandbox">
+        <ul>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/produtos">Consulta</a>
+            </li>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/produtos/cad-produto">Novo</a>
+            </li>
+        </ul>
+    </li>    
+    <li nz-submenu nzTitle="Orçamentos" nzIcon="snippets">
+        <ul>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/orcamentos">Consulta</a>
+            </li>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/orcamentos/cad-orcamento">Novo</a>
+            </li>
+        </ul>
+    </li>
+    <li nz-submenu nzTitle="Pedidos" nzIcon="form">
+        <ul>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/pedidos">Consulta</a>
+            </li>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/pedidos/cad-pedido">Novo</a>
+            </li>
+        </ul>
+    </li>
+    <li nz-submenu nzTitle="Usuários" nzIcon="user">
+        <ul>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/usuarios">Consulta</a>
+            </li>
+            <li nz-menu-item nzMatchRouter [nzMatchRouterExact]="true">
+                <a routerLink="/usuarios/cad-usuario">Novo</a>
+            </li>
+        </ul>
+    </li>
+</ul>

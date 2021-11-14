@@ -1,0 +1,53 @@
+<nz-page-header nzBackIcon [nzTitle]="novoRegistro ? 'Novo registro' : 'Editar registro'">
+    <nz-page-header-extra>
+        <button nz-button (click)="cancelar()"><i nz-icon class="far fa-undo" nzTheme="outline"></i>Cancelar</button>
+        <button nz-button nzType="primary" (click)="salvar()"><i nz-icon class="far fa-check"></i>Salvar</button>
+    </nz-page-header-extra>
+</nz-page-header>
+
+
+<div class="padding_form">
+
+    <form nz-form [formGroup]="form" *ngIf="formaPagamento">
+        <div nz-row>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Descricao</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="descricao" id="descricao" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Desconto</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="desconto" id="desconto" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Vencimentos</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido" >
+                        <nz-select nzMode="multiple" nzPlaceHolder="Selecione os dias de vencimento"
+                        formControlName="dias"
+                            [(ngModel)]="diasSelecionados">
+                            <nz-option *ngFor="let item of diasOpcoes" [nzLabel]="item" [nzValue]="item"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+
+                </nz-form-item>
+            </div>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Cod. Externo</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="codigoExterno"
+                            id="codigoExterno" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+</div>

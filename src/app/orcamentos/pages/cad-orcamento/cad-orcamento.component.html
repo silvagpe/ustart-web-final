@@ -1,0 +1,155 @@
+<nz-page-header nzBackIcon [nzTitle]="novoRegistro ? 'Novo registro' : 'Editar registro'">
+    <nz-page-header-extra>
+        <button nz-button (click)="voltar()"><i nz-icon nzType="arrow-left" nzTheme="outline"></i>Cancelar</button>
+        <button nz-button nzType="primary" (click)="salvar()"><i nz-icon nzType="check"></i>Salvar</button>
+
+    </nz-page-header-extra>
+</nz-page-header>
+
+
+<div class="padding_form">
+
+    <form nz-form [formGroup]="form" *ngIf="orcamento">
+        <div nz-row>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Data</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <nz-date-picker formControlName="dataOrcamento" nzFormat="dd/MM/yyyy"></nz-date-picker>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Cliente</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <nz-select nzShowSearch nzAllowClear [(ngModel)]="clienteSel"
+                            [nzPlaceHolder]="carregandoClientes ? 'Carregando...' : 'Selecione...'"
+                            formControlName="clienteId">
+                            <ng-container *ngFor="let cliente of clientes">
+                                <nz-option *ngIf="!carregandoClientes" [nzLabel]="cliente.nome" [nzValue]="cliente.id">
+                                </nz-option>
+                            </ng-container>
+                            <nz-option *ngIf="carregandoClientes" nzDisabled nzCustomContent>
+                                <i nz-icon nzType="loading" class="loading-icon"></i>
+                                Carregando...
+                            </nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Forma Pagamento</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <nz-select nzShowSearch nzAllowClear [(ngModel)]="formaPagamentoSel"
+                            [nzPlaceHolder]="carregandoFormasPgto ? 'Carregando...' : 'Selecione...'"
+                            formControlName="formaPagamentoId">
+                            <ng-container *ngFor="let formaPgto of formasPagamentos">
+                                <nz-option *ngIf="!carregandoFormasPgto" [nzLabel]="formaPgto.descricao"
+                                    [nzValue]="formaPgto.id">
+                                </nz-option>
+                            </ng-container>
+                            <nz-option *ngIf="carregandoFormasPgto" nzDisabled nzCustomContent>
+                                <i nz-icon nzType="loading" class="loading-icon"></i>
+                                Carregando...
+                            </nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSm="24">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Observações</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="observacao" id="observacao" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <!--TOTAIS-->
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="6">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Qtd. Itens</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="quantidadeDeItens"
+                            id="quantidadeDeItens" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="6">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Total Itens</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="totalItens" id="totalItens" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="6">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Total Desconto</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="totalDesconto"
+                            id="totalDesconto" />
+                    </nz-form-control>
+                </nz-form-item>
+
+            </div>
+            <div nz-col nzSpan="6">
+                <nz-form-label nzFor="nome" [nzNoColon]="true">Total Produtos</nz-form-label>
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                        <input nz-input placeholder="Digite aqui..." formControlName="totalProdutos"
+                            id="totalProdutos" />
+                    </nz-form-control>
+                </nz-form-item>
+
+            </div>
+        </div>
+
+        <!--Itens-->
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <button nz-button nzType="primary" (click)="adicionar()">
+                    <i nz-icon nzType="plus"></i>Adicionar</button>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col nzSpan="24">
+                <nz-table #dados [nzData]="orcamentoItens" nzSize="small" [nzFrontPagination]="false"
+                    [nzBordered]="true" [nzScroll]="{ y: '450px' }">
+                    <thead>
+                        <tr>
+                            <th nzWidth="150px">Ações</th>
+                            <th nzWidth="250px">Nome</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Desconto</th>
+                            <th>Total Uni.</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dados.data">
+                            <td>
+                                <button nz-button nzType="primary" nzShape="circle" (click)="editar(item)">
+                                    <i nz-icon nzType="edit"></i>
+                                </button>
+                                <button nz-button nzType="primary" nzShape="circle" (click)="excluir(item)">
+                                    <i nz-icon nzType="delete"></i>
+                                </button>
+                            </td>
+                            <td>{{item.produto.nome}}</td>
+                            <td>{{item.quantidade}}</td>
+                            <td>{{item.precoUnitario}}</td>
+                            <td>{{item.desconto}}</td>
+                            <td>{{item.totalUnitario}}</td>
+                            <td>{{item.totalItem}}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </form>
+</div>

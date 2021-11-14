@@ -1,0 +1,88 @@
+<form nz-form [formGroup]="form" *ngIf="orcamentoItem">
+    
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+            <nz-form-label nzFor="nome" [nzNoColon]="true">Produto</nz-form-label>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                    <nz-select nzShowSearch nzAllowClear [(ngModel)]="produtoSel"
+                        (ngModelChange)="produtoOnChange($event)"
+                        [nzPlaceHolder]="carregandoProdutos ? 'Carregando...' : 'Selecione...'"
+                        formControlName="produtoId">
+                        <ng-container *ngFor="let produto of produtos">
+                            <nz-option *ngIf="!carregandoProdutos" [nzLabel]="produto.nome" [nzValue]="produto.id">
+                            </nz-option>
+                        </ng-container>
+                        <nz-option *ngIf="carregandoProdutos" nzDisabled nzCustomContent>
+                            <i nz-icon nzType="loading" class="loading-icon"></i>
+                            Carregando...
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label nzFor="nome" [nzNoColon]="true">Preço</nz-form-label>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                    <input nz-input placeholder="Digite aqui..." autocomplete="off" (ngModelChange)="calcularTotais()"
+                        formControlName="precoUnitario" id="precoUnitario" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label nzFor="nome" [nzNoColon]="true">Quantidade</nz-form-label>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                    <input nz-input placeholder="Digite aqui..." autocomplete="off" (ngModelChange)="calcularTotais()"
+                        formControlName="quantidade" id="quantidade" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label nzFor="nome" [nzNoColon]="true">Desconto</nz-form-label>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                    <input nz-input placeholder="Digite aqui..." (ngModelChange)="calcularTotais()" autocomplete="off"
+                        formControlName="desconto" id="desconto" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12"></div>
+    </div>
+
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label nzFor="nome" [nzNoColon]="true">Total unitário</nz-form-label>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                    <input nz-input placeholder="Digite aqui..." formControlName="totalUnitario" id="totalUnitario" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label nzFor="nome" [nzNoColon]="true">Total Item</nz-form-label>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                    <input nz-input placeholder="Digite aqui..." formControlName="totalItem" id="totalItem" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+            <nz-form-label nzFor="nome" [nzNoColon]="true">Observações</nz-form-label>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="24" nzErrorTip="Campo requerido">
+                    <input nz-input placeholder="Digite aqui..." formControlName="observacao" id="observacao" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+    </div>
+</form>

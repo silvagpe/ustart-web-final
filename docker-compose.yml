@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  site:
+    image: silvagpe/node14-angular-dev:latest
+    restart: unless-stopped 
+    ports:      
+      - "4200:4200"
+    volumes:
+      #Customizar a configuração
+      - ./:/app
+    command: /bin/sh -c "while sleep 1000; do :; done"
