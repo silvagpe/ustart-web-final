@@ -8,6 +8,7 @@
 
 <div class="padding_form">
 
+    {{cidadeSelecionada}}
     <div nz-row>
         <div nz-col nzSm="24">
             <nz-form-item>
@@ -131,7 +132,7 @@
                     <nz-form-control [nzSpan]="24">
                         <nz-select nzShowSearch nzAllowClear
                             [nzPlaceHolder]="carregandoCidades ? 'Carregando...' : 'Selecione...'"
-                            formControlName="cidadeId" [(ngModel)]="cidadeSelecionada">
+                            formControlName="cidadeId" (ngModelChange)="cidadeSelecionada">
                             <ng-container *ngFor="let cidade of cidades">
                                 <nz-option *ngIf="!carregandoCidades" [nzLabel]="cidade.nome" [nzValue]="cidade.id">
                                 </nz-option>

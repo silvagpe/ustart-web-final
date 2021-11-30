@@ -174,6 +174,8 @@ export class CadClienteComponent implements OnInit {
       (estados) => {
         this.carregandoEstados = false;
         this.estados = estados;
+
+        
       },
       (error) => {
         this.carregandoEstados = false;
